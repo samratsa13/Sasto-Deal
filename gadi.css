@@ -1,0 +1,292 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: rgba(171, 165, 165, 0.7);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 30px;
+    position: absolute;
+    color: #fff;
+    font-family: realized;
+    margin-top: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: maroon;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+    font-family: realized;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+/* Model Selector Styling */
+.model-selector {
+    margin-top: 80px;
+    padding: 30px 5%;
+    text-align: center;
+}
+
+.model-selector h2 {
+    color: maroon;
+    font-family: 'Balgeri', sans-serif;
+    margin-bottom: 20px;
+}
+
+.dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid maroon;
+    border-radius: 5px;
+    background-color: white;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+}
+
+.dropdown:hover {
+    background-color: #f1f1f1;
+}
+
+/* Search Bar Styling */
+.search-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px ;
+    margin: 20px auto;
+    width: 40%;
+    border-radius: 20px;
+}
+
+.search-bar{
+    width: 100%;
+ padding: 12px 40px 12px 15px;
+     font-size: 16px;
+    border: 1px solid maroon;
+    border-radius: 30px;
+    outline: none;
+}
+
+.search-bar:focus {
+    border-color: #e6b800;
+}
+.search-icon {
+    position: absolute;
+    right: 450px;
+    top: 285px; /* Space from the right edge */
+    font-size: 18px;
+    color: maroon;
+    cursor: pointer;
+}
+
+/* Models Section */
+.models-section {
+    padding: 50px 5%;
+    text-align: center;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+.models-section h2 {
+    margin-bottom: 30px;
+    color: maroon;
+    font-family: 'Bronx', sans-serif;
+}
+
+.model-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Smaller cards */
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #3a3939;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease;
+    height: 300px; /* Adjusted height */
+    padding: 15px;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly smaller scale effect */
+}
+
+.card-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+}
+.card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    font-family: bronx;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    opacity: 0;
+    padding: 15px;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card img {
+    width: 100%;
+    height: 200px; /* Adjusted to fit better */
+    object-fit: cover;
+    border-bottom: 5px solid #e6b800;
+}
+
+.order-btn {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background-color: maroon;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+.order-btn:hover {
+    background-color: #e6b800;
+    color: #333;
+}
+
+.card h3 {
+    margin: 15px 0;
+    color: #e6b800;
+    font-family: 'Bronx', sans-serif;
+    font-size: 18px; /* Reduced font size */
+}
+
+.card p {
+    margin-bottom: 15px;
+    color: #eaeaea;
+    font-size: 14px; /* Smaller font for description */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        
+    }
+
+    .model-cards {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .model-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .search-container {
+        width: 80%;
+    }
+}
+
+
+/* navbar ko lagi */
+/* Hamburger menu icon - hidden on desktop */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  color: maroon;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  right: 5%;
+  top: 20px;
+  z-index: 1100; /* above navbar */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* hide nav links initially */
+    flex-direction: column;
+    background-color: rgba(171, 165, 165, 0.9);
+    position: fixed;
+    top: 70px; /* below navbar */
+    right: 0;
+    width: 200px;
+    height: 100%;
+    padding: 20px;
+    border-radius: 0 0 0 10px;
+    gap: 20px;
+    z-index: 1000;
+    transition: right 0.3s ease;
+  }
+
+  .nav-links.active {
+    display: flex; /* show when active */
+  }
+
+  /* Show hamburger icon */
+  .menu-icon {
+    display: block;
+  }
+
+  /* Adjust navbar to relative to keep menu icon in right place */
+  .navbar {
+    position: relative;
+  }
+}
