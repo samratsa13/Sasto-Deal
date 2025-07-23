@@ -1,3 +1,9 @@
+
+<?php session_start();
+
+$_SESSION['user_id'] = $row['id']; // or whatever you store
+$_SESSION['username'] = $row['username']; // optional
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,13 +92,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="#">Home</a></li>
                 <li><a href="#model">Exclusive Models</a></li>
                 <li><a href="#">Order Now</a></li>
-                <li class="user-menu">
-  <i class="fas fa-user" id="user-icon" style="cursor:pointer; font-size: 20px; color: maroon;"></i>
-  <ul class="user-dropdown" id="user-dropdown">
-    <li><a href="login.php">Login</a></li>
-    <li><a href="logout.php">Logout</a></li>
-  </ul>
+                
+<li class="user-menu">
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <i class="fas fa-user" id="user-icon" style="cursor:pointer; font-size: 20px; color: maroon;"></i>
+        <ul class="user-dropdown" id="user-dropdown">
+            <li><a href="profile.php">Your Profile</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    <?php else: ?>
+        <a href="login.php" style="color: maroon; font-weight: bold;">Login</a>
+    <?php endif; ?>
 </li>
+
 
             </ul>
         </nav>
@@ -114,17 +126,24 @@ if ($conn->connect_error) {
 $result = $conn->query("SELECT * FROM car_models");
 
 while ($row = $result->fetch_assoc()) {
-    echo '
-    <div class="card">
-        <div class="card-image">
-            <img src="' . $row["image_path"] . '" alt="' . $row["model_name"] . '">
-            <div class="card-overlay">
-                <h3>' . $row["model_name"] . '</h3>
-                <p>' . $row["description"] . '</p>
-                <a href="order.php?model=' . urlencode($row["model_name"]) . '" class="order-btn">Order Now</a>
-            </div>
+echo '
+<div class="card">
+    <div class="card-image">
+        <img src="' . $row["image_path"] . '" alt="' . $row["model_name"] . '">
+        <div class="card-overlay">
+            <h3>' . $row["model_name"] . '</h3>
+            <p>' . $row["description"] . '</p>';
+
+if (isset($_SESSION['user_id'])) {
+    echo '<a href="order.php?model=' . urlencode($row["model_name"]) . '" class="order-btn">Order Now</a>';
+} else {
+    echo '<a href="login.php" class="order-btn">Order Now</a>';
+}
+
+echo '
         </div>
-    </div>';
+    </div>
+</div>';
 }
 $conn->close();
 ?>

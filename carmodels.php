@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Connect to DB
 $conn = new mysqli("localhost", "root", "", "sastodeal_db");
 if ($conn->connect_error) {
@@ -179,6 +180,10 @@ $conn->close();
     </div>
 
     <script>
+        
+    const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+
+
         const carModels = <?php echo json_encode($carModels); ?>;
 
         function populateDropdown() {
@@ -209,15 +214,16 @@ $conn->close();
                         const card = document.createElement('div');
                         card.classList.add('card');
                         card.innerHTML = `
-                            <div class="card-image">
-                                <img src="${car.image}" alt="${car.name}" />
-                                <div class="card-overlay">
-                                    <p>${car.description}</p>
-                                    <a href="order.html" class="order-btn">Order Now</a>
-                                </div>
-                            </div>
-                            <h3>${car.name}</h3>
-                        `;
+    <div class="card-image">
+        <img src="${car.image}" alt="${car.name}" />
+        <div class="card-overlay">
+            <p>${car.description}</p>
+            <a href="${isLoggedIn ? 'order.php?model=' + encodeURIComponent(car.name) : 'login.php'}" class="order-btn">Order Now</a>
+        </div>
+    </div>
+    <h3>${car.name}</h3>
+`;
+
                         modelCards.appendChild(card);
                     });
                 }

@@ -1,4 +1,5 @@
 <?php
+
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -71,6 +72,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 }
+session_start();
+$_SESSION['user_id'] = $user_id; // set user id
+$_SESSION['username'] = $username; // optional
+
+echo "SESSION SET: " . $_SESSION['user_id'];
+exit;
+
 ?>
 
 <!DOCTYPE html>
